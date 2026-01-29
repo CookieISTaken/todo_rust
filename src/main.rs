@@ -1,5 +1,5 @@
-use std::fs::OpenOptions;
-use std::io::Write;
+use std::fs::{self, OpenOptions};
+use std::io::{Read, Write};
 
 #[derive(Debug)]
 struct Task {
@@ -45,11 +45,9 @@ impl Todo {
                 return;
             }
         };
-
-        match writeln!(file, "Test writing 101") {
-            Ok(_) => {}
-            Err(error) => println!("Error writing file: {}", error),
-        }
+        let task_content = String::new();
+        fs::read_to_string(&task_content).expect("Error found!");
+        println!("{}", task_content);
     }
 
     fn add(&mut self, task: String) {
@@ -89,5 +87,6 @@ impl Todo {
 }
 
 fn main() {
-    let _todo = Todo::new();
+    let todo = Todo::new();
+    println!("Everything working fine!!");
 }
